@@ -18,9 +18,15 @@
     <ClInclude Include="LibNyquistAudioAssetDecoder.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PassthroughAudioAssetConverter.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LibNyquistAudioAssetDecoder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PassthroughAudioAssetConverter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -92,9 +92,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="LibNyquistAudioAssetDecoder.hpp" />
+    <ClInclude Include="PassthroughAudioAssetConverter.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LibNyquistAudioAssetDecoder.cpp" />
+    <ClCompile Include="PassthroughAudioAssetConverter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\..\Thirdparties\Submodules\libnyquist\build\libnyquist.vcxproj">
