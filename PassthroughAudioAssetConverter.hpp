@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "LibNyquistAudioAssetDecoder.hpp"
+#include "OggVorbisAudioAssetDecoder.hpp"
 
 namespace usagi
 {
@@ -8,7 +8,7 @@ struct AssetLoadingContext;
 
 struct PassthroughAudioAssetConverter
 {
-    using DefaultDecoder = LibNyquistAudioAssetDecoder;
+    using DefaultDecoder = OggVorbisAudioAssetDecoder;
 
     std::shared_ptr<AudioBuffer> operator()(
         AssetLoadingContext *ctx,

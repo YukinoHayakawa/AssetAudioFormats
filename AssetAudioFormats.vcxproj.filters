@@ -15,18 +15,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="LibNyquistAudioAssetDecoder.hpp">
+    <ClInclude Include="PassthroughAudioAssetConverter.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PassthroughAudioAssetConverter.hpp">
+    <ClInclude Include="OggVorbisAudioAssetDecoder.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="LibNyquistAudioAssetDecoder.cpp">
+    <ClCompile Include="PassthroughAudioAssetConverter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PassthroughAudioAssetConverter.cpp">
+    <ClCompile Include="OggVorbisAudioAssetDecoder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

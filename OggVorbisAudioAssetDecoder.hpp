@@ -6,7 +6,7 @@
 
 namespace usagi
 {
-struct LibNyquistAudioAssetDecoder
+struct OggVorbisAudioAssetDecoder
 {
     AudioBuffer operator()(std::istream &in) const;
 };

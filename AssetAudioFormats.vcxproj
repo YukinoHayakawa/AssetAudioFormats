@@ -91,17 +91,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="LibNyquistAudioAssetDecoder.hpp" />
+    <ClInclude Include="OggVorbisAudioAssetDecoder.hpp" />
     <ClInclude Include="PassthroughAudioAssetConverter.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="LibNyquistAudioAssetDecoder.cpp" />
+    <ClCompile Include="OggVorbisAudioAssetDecoder.cpp" />
     <ClCompile Include="PassthroughAudioAssetConverter.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\Thirdparties\Submodules\libnyquist\build\libnyquist.vcxproj">
-      <Project>{2567d83a-3050-37aa-acae-f9841523146d}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\..\Usagi\Usagi\Usagi.vcxproj">
       <Project>{4250e1c0-ea0b-4575-bc04-11e7f83c2ed4}</Project>
     </ProjectReference>
