@@ -17,27 +17,27 @@ size_t read_func(
 {
     if(size == 0) return 0;
     auto &s = *static_cast<std::istream*>(stream);
-    LOG(trace, "read@{} {} {}", s.tellg(), size, count);
+    // LOG(trace, "read@{} {} {}", s.tellg(), size, count);
     s.read(static_cast<char*>(buffer), size * count);
-    LOG(trace, "fail? {} eof? {} bad? {}", s.fail(), s.eof(), s.bad());
+    // LOG(trace, "fail? {} eof? {} bad? {}", s.fail(), s.eof(), s.bad());
     return s.gcount() / size;
 }
 
 int seek_func(void *stream, ogg_int64_t offset, int origin)
 {
     auto &s = *static_cast<std::istream*>(stream);
-    LOG(trace, "seek@{2} {1} {0}", offset, [&]() {
-        switch(origin)
-        {
-            case SEEK_SET:
-                return "set";
-            case SEEK_CUR:
-                return "beg";
-            case SEEK_END:
-                return "end";
-            default: return "???";
-        }
-    }(), s.tellg());
+    // LOG(trace, "seek@{2} {1} {0}", offset, [&]() {
+    //     switch(origin)
+    //     {
+    //         case SEEK_SET:
+    //             return "set";
+    //         case SEEK_CUR:
+    //             return "beg";
+    //         case SEEK_END:
+    //             return "end";
+    //         default: return "???";
+    //     }
+    // }(), s.tellg());
     switch(origin)
     {
         case SEEK_SET:
@@ -54,14 +54,14 @@ int seek_func(void *stream, ogg_int64_t offset, int origin)
         default:
             USAGI_THROW(std::logic_error { "invalid direction" });
     }
-    LOG(trace, " -> {}", s.tellg());
+    // LOG(trace, " -> {}", s.tellg());
     return s.fail();
 }
 
 long tell_func(void *stream)
 {
     auto &s = *static_cast<std::istream*>(stream);
-    LOG(trace, "tell {}", s.tellg());
+    // LOG(trace, "tell {}", s.tellg());
     return static_cast<long>(s.tellg());
 }
 
@@ -144,11 +144,12 @@ AudioBuffer OggVorbisAudioAssetDecoder::operator()(std::istream &in) const
         switch(ret)
         {
             case 0:
-                LOG(info, "Ended reading stream");
+                LOG(info, "Ended reading stream, got {} frames",
+                    decoded_frames);
                 break;
             case OV_HOLE:
-                LOG(error, "OV_HOLE: there was an interruption in the data.");
-                USAGI_THROW(std::runtime_error("OV_HOLE"));
+                LOG(warn, "OV_HOLE: there was an interruption in the data.");
+                continue;
             case OV_EBADLINK:
                 LOG(error, "OV_EBADLINK: an invalid stream section was "
                     "supplied to libvorbisfile, or the requested "
@@ -174,7 +175,15 @@ AudioBuffer OggVorbisAudioAssetDecoder::operator()(std::istream &in) const
         decoded_frames += ret;
     }
     if(decoded_frames != buf.frames)
-        USAGI_THROW(std::runtime_error("unexpected EOF"));
+    {
+        LOG(warn, "read fewer frames than declared");
+        for(auto &&c : buf.channels)
+        {
+            c.resize(decoded_frames);
+            c.shrink_to_fit();
+        }
+        buf.frames = decoded_frames;
+    }
 
     return buf;
 }
